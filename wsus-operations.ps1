@@ -1,270 +1,231 @@
-#author: happysysadm.com
+<#
+.SYNOPSIS
+    Insert general purpose here.
 
-$action = $false
-
-$now = Get-Date
-
-$comments = "Today is $($now.ToLongDateString())`n"
-
-$d0 = Get-Date -Day 1 -Month $($now.Month) -Year $now.Year
-
-switch ($d0.DayOfWeek){
-
-        "Sunday"    {$patchTuesday0 = $d0.AddDays(9); break}
-
-        "Monday"    {$patchTuesday0 = $d0.AddDays(8); break}
-
-        "Tuesday"   {$patchTuesday0 = $d0.AddDays(7); break}
-
-        "Wednesday" {$patchTuesday0 = $d0.AddDays(13); break}
-
-        "Thursday"  {$patchTuesday0 = $d0.AddDays(12); break}
-
-        "Friday"    {$patchTuesday0 = $d0.AddDays(11); break}
-
-        "Saturday"  {$patchTuesday0 = $d0.AddDays(10); break}
-
-     }
-
-$d1 = Get-Date -Day 1 -Month $($now.Month + 1) -Year $now.Year
-
-switch ($d1.DayOfWeek){
-
-        "Sunday"    {$patchTuesday1 = $d1.AddDays(9); break}
-
-        "Monday"    {$patchTuesday1 = $d1.AddDays(8); break}
-
-        "Tuesday"   {$patchTuesday1 = $d1.AddDays(7); break}
-
-        "Wednesday" {$patchTuesday1 = $d1.AddDays(13); break}
-
-        "Thursday"  {$patchTuesday1 = $d1.AddDays(12); break}
-
-        "Friday"    {$patchTuesday1 = $d1.AddDays(11); break}
-
-        "Saturday"  {$patchTuesday1 = $d1.AddDays(10); break}
-
-     }
-
-if($now.date -le $patchTuesday0.date){
-
-    $patchTuesday = $patchTuesday0}else{$patchTuesday = $patchTuesday1
+.DESCRIPTION
+    Insert script description here.
     
-    }
+.NOTES
+    Author: happysysadm.com
+    Edited: JBear
+#>
+param(
 
-$d0 = Get-Date -Day 1 -Month $($now.Month) -Year $now.Year
+    $Action = $false,
+    $Today = (Get-Date),
+    $Comments = (New-Object System.Collections.ArrayList),
+    $d0 = (Get-Date -Day 1 -Month $($Today.Month) -Year $Today.Year)
+)
 
-switch ($d0.DayOfWeek){
+$Comments.Add( "Today is $($Today.ToLongDateString())`n" )
 
-        "Sunday"    {$FourthMonday0 = $d0.AddDays(22); break}
+switch ($d0.DayOfWeek) {
 
-        "Monday"    {$FourthMonday0 = $d0.AddDays(21); break}
+    "Sunday"    { $patchTuesday0 = $d0.AddDays(9)  }
+    "Monday"    { $patchTuesday0 = $d0.AddDays(8)  } 
+    "Tuesday"   { $patchTuesday0 = $d0.AddDays(7)  }
+    "Wednesday" { $patchTuesday0 = $d0.AddDays(13) }
+    "Thursday"  { $patchTuesday0 = $d0.AddDays(12) }
+    "Friday"    { $patchTuesday0 = $d0.AddDays(11) }
+    "Saturday"  { $patchTuesday0 = $d0.AddDays(10) }
+}
 
-        "Tuesday"   {$FourthMonday0 = $d0.AddDays(20); break}
+$d1 = Get-Date -Day 1 -Month $($Today.Month + 1) -Year $Today.Year
 
-        "Wednesday" {$FourthMonday0 = $d0.AddDays(26); break}
+switch ($d1.DayOfWeek) {
 
-        "Thursday"  {$FourthMonday0 = $d0.AddDays(25); break}
+    "Sunday"    { $patchTuesday1 = $d1.AddDays(9)  }
+    "Monday"    { $patchTuesday1 = $d1.AddDays(8)  }
+    "Tuesday"   { $patchTuesday1 = $d1.AddDays(7)  }
+    "Wednesday" { $patchTuesday1 = $d1.AddDays(13) }
+    "Thursday"  { $patchTuesday1 = $d1.AddDays(12) }
+    "Friday"    { $patchTuesday1 = $d1.AddDays(11) }
+    "Saturday"  { $patchTuesday1 = $d1.AddDays(10) }
 
-        "Friday"    {$FourthMonday0 = $d0.AddDays(24); break}
+}
 
-        "Saturday"  {$FourthMonday0 = $d0.AddDays(23); break}
+if($Today.Date -le $patchTuesday0.Date) {
 
-     }
+    $patchTuesday = $patchTuesday0
+}
 
+else { 
+
+    $patchTuesday = $patchTuesday1 
+}
+
+$d0 = Get-Date -Day 1 -Month $($Today.Month) -Year $Today.Year
+
+switch ($d0.DayOfWeek) {
+
+    "Sunday"    { $FourthMonday0 = $d0.AddDays(22) }
+    "Monday"    { $FourthMonday0 = $d0.AddDays(21) }
+    "Tuesday"   { $FourthMonday0 = $d0.AddDays(20) }
+    "Wednesday" { $FourthMonday0 = $d0.AddDays(26) }
+    "Thursday"  { $FourthMonday0 = $d0.AddDays(25) }
+    "Friday"    { $FourthMonday0 = $d0.AddDays(24) }
+    "Saturday"  { $FourthMonday0 = $d0.AddDays(23) }
+}
     
-$d1 = Get-Date -Day 1 -Month $($now.Month + 1) -Year $now.Year
+$d1 = Get-Date -Day 1 -Month $($Today.Month + 1) -Year $Today.Year
 
-switch ($d1.DayOfWeek){
+switch ($d1.DayOfWeek) {
 
-        "Sunday"    {$FourthMonday1 = $d1.AddDays(22); break}
+    "Sunday"    { $FourthMonday1 = $d1.AddDays(22) }
+    "Monday"    { $FourthMonday1 = $d1.AddDays(21) }
+    "Tuesday"   { $FourthMonday1 = $d1.AddDays(20) }
+    "Wednesday" { $FourthMonday1 = $d1.AddDays(26) }
+    "Thursday"  { $FourthMonday1 = $d1.AddDays(25) }
+    "Friday"    { $FourthMonday1 = $d1.AddDays(24) }
+    "Saturday"  { $FourthMonday1 = $d1.AddDays(23) }
+}
 
-        "Monday"    {$FourthMonday1 = $d1.AddDays(21); break}
+if($Today.Date -le $FourthMonday0.Date) {
 
-        "Tuesday"   {$FourthMonday1 = $d1.AddDays(20); break}
-
-        "Wednesday" {$FourthMonday1 = $d1.AddDays(26); break}
-
-        "Thursday"  {$FourthMonday1 = $d1.AddDays(25); break}
-
-        "Friday"    {$FourthMonday1 = $d1.AddDays(24); break}
-
-        "Saturday"  {$FourthMonday1 = $d1.AddDays(23); break}
-
-     }
-
-if($now.date -le $FourthMonday0.date){
-
-    $FourthMonday = $FourthMonday0}else{$FourthMonday= $FourthMonday1
-    
-    }
-
-if($now.date -le $FourthMonday0.adddays(1).date){
-
-    $StandardApprovalDay = $FourthMonday0.AddDays(1)}else{$StandardApprovalDay= $FourthMonday1.AddDays(1)
-    
-    }
-
-if($now.date -le $FourthMonday0.adddays(1).date){
-
-    $CriticalApprovalDay = $FourthMonday0.AddDays(7)}else{$CriticalApprovalDay= $FourthMonday1.AddDays(7)
-    
-    }
-
-if($now.date -eq $PatchTuesday.date){
-
-    $comments += "==> It's patch Tuesday!`n"
-
-    $action = $true
-
-    }
+    $FourthMonday = $FourthMonday0 
+}
 
 else {
 
-    $comments += "Next Patch Tuesday is in $((New-TimeSpan -Start $now.date -End $patchTuesday.date).days) days on $($patchTuesday.ToLongDateString())`n"
-    
-    }
+    $FourthMonday = $FourthMonday1
+}
 
-if($now.date -eq $FourthMonday.date){
+if($Today.Date -le $FourthMonday0.AddDays(1).Date) {
 
-    $comments += "==> It's fourth monday of the month - synching WSUS with Microsoft!`n"
-
-    $action = $true
-
-    $startTime = (get-date -f dd-MM-yyyy)
-
-    (Get-WsusServer).GetSubscription().StartSynchronization()
-
-    }
-
-else {
-
-    $comments += "Next Sync will happen in $((New-TimeSpan -Start $now.date -End $FourthMonday.date).days) days on $($FourthMonday.ToLongDateString())`n"
-    
-    }
-
-if($now.date -eq $StandardApprovalDay.date){
-
-    $comments += "==> It's the day after fourth monday of the month - approving for Standard servers`n"
-
-    $action = $true
-
-    $wsus = Get-WsusServer
-
-    $allupdates = $wsus.GetUpdates() 
-
-    $alltargetgroups = $wsus.GetComputerTargetGroups()
-
-    $computergroups = ($alltargetgroups | ? name -match 'Standard').name
-
-    $computergroups | % {
-
-        Get-WsusUpdate -Approval Unapproved -Status FailedOrNeeded | Approve-WsusUpdate -Action Install -TargetGroupName $_ –Verbose
-
-        }
-
-    $startTime = (Get-Date -f dd-MM-yyyy)
-
-    }
-
-else {
-
-    $comments += "Next approval for Standard servers will happen in $((New-TimeSpan -Start $now.date -End $StandardApprovalDay.Date).days) days on $($StandardApprovalDay.ToLongDateString())`n"
-    
-    }
-
-if($now.date -eq $CriticalApprovalDay.date){
-
-    $comments += "==> It's the 7th day after fourth monday of the month - approving for User-Touchy and Mission-Critical servers`n"
-
-    $action = $true
-
-    $wsus = Get-WsusServer
-
-    $allupdates = $wsus.GetUpdates() 
-
-    $alltargetgroups = $wsus.GetComputerTargetGroups()
-
-    $computergroups = ($alltargetgroups | ? name -match 'touchy|critical').name
-
-    $computergroups | % {
-
-        Get-WsusUpdate -Approval Unapproved -Status FailedOrNeeded | Approve-WsusUpdate -Action Install -TargetGroupName $_ –Verbose
-
-        }
-
-    $startTime = (get-date -f dd-MM-yyyy)
-
-    }
-
-else {
-
-    $comments += "Next approval for User-Touchy and Mission-Critical servers will happen in $((New-TimeSpan -Start $now.date -End $CriticalApprovalDay.date).days) days on $($CriticalApprovalDay.ToLongDateString())`n"
-    
-    }
-
-if($now.day -eq 7){
-
-    $comments += "==> Today is WSUS monthly clean up day`n";$action = $true
-
-    }
+    $StandardApprovalDay = $FourthMonday0.AddDays(1)
+}
 
 else{
 
-    $comments += "Next WSUS monthly clean up will happen in $((New-TimeSpan -Start $now.date -End $(Get-Date -Day 7 -Month $($now.Month + 1) -Year $now.Year -OutVariable datenextcleanup).Date).Days) days on $($datenextcleanup.ToLongDateString())`n"
+    $StandardApprovalDay= $FourthMonday1.AddDays(1)  
+}
+
+if($Today.Date -le $FourthMonday0.AddDays(1).Date) {
+
+    $CriticalApprovalDay = $FourthMonday0.AddDays(7)
+}
+
+else {
+
+    $CriticalApprovalDay= $FourthMonday1.AddDays(7) 
+}
+
+if($Today.Date -eq $PatchTuesday.Date) {
+
+    $Comments.Add( "==> It's patch Tuesday!`n" )
+    $Action = $true
+}
+
+else {
+
+    $Comments.Add( "Next Patch Tuesday is in $((New-TimeSpan -Start $Today.Date -End $patchTuesday.Date).days) days on $($patchTuesday.ToLongDateString())`n" )
+}
+
+if($Today.Date -eq $FourthMonday.Date) {
+
+    $Comments.Add( "==> It's fourth monday of the month - synching WSUS with Microsoft!`n" )
+    $Action = $true
+    $startTime = (Get-Date -f dd-MM-yyyy)
+    (Get-WsusServer).GetSubscription().StartSynchronization()
+}
+
+else {
+
+    $Comments.Add( "Next Sync will happen in $((New-TimeSpan -Start $Today.Date -End $FourthMonday.Date).days) days on $($FourthMonday.ToLongDateString())`n" )
+}
+
+if($Today.Date -eq $StandardApprovalDay.Date) {
+
+    $Comments.Add( "==> It's the day after fourth monday of the month - approving for Standard servers`n" )
+    $Action = $true
+    $WSUS = Get-WsusServer
+    $allupDates = $WSUS.GetUpDates() 
+    $alltargetgroups = $WSUS.GetComputerTargetGroups()
+    $computergroups = ($alltargetgroups | ? name -match 'Standard').name
+    $computergroups | % {
+
+        Get-WsusUpDate -Approval Unapproved -Status FailedOrNeeded | Approve-WsusUpDate -Action Install -TargetGroupName $_ –Verbose
 
     }
 
-$comments
+    $startTime = (Get-Date -f dd-MM-yyyy)
+}
 
-if(!$action){$comments += "<i style='color:red'>No actions to be done today</i>`n"}
+else {
 
-$commentshtml = "<p style='color:blue'>" + $comments.replace("`n",'<br>') + "</p>"
+    $Comments.Add( "Next approval for Standard servers will happen in $((New-TimeSpan -Start $Today.Date -End $StandardApprovalDay.Date).days) days on $($StandardApprovalDay.ToLongDateString())`n" )
+}
 
-$wsus = Get-WsusServer
+if($Today.Date -eq $CriticalApprovalDay.Date) { 
 
-$alltargetgroups = $wsus.GetComputerTargetGroups()
+    $Comments.Add( "==> It's the 7th day after fourth monday of the month - approving for User-Touchy and Mission-Critical servers`n" )
+    $Action = $true
+    $WSUS = Get-WsusServer
+    $allupDates = $WSUS.GetUpDates() 
+    $alltargetgroups = $WSUS.GetComputerTargetGroups()
+    $computergroups = ($alltargetgroups | ? name -match 'touchy|critical').Name
 
-$patchreport = $alltargetgroups | ForEach {
+    $computergroups | % {
+
+        Get-WsusUpDate -Approval Unapproved -Status FailedOrNeeded | Approve-WsusUpDate -Action Install -TargetGroupName $_ –Verbose
+    }
+
+    $startTime = (get-Date -f dd-MM-yyyy)
+
+}
+
+else {
+
+    $Comments.Add( "Next approval for User-Touchy and Mission-Critical servers will happen in $((New-TimeSpan -Start $Today.Date -End $CriticalApprovalDay.Date).days) days on $($CriticalApprovalDay.ToLongDateString())`n" )
+}
+
+if($Today.day -eq 7) {
+
+    $Comments.Add( "==> Today is WSUS monthly clean up day`n" )
+    $Action = $true
+}
+
+else {
+
+    $Comments.Add( "Next WSUS monthly clean up will happen in $((New-TimeSpan -Start $Today.Date -End $(Get-Date -Day 7 -Month $($Today.Month + 1) -Year $Today.Year -OutVariable Datenextcleanup).Date).Days) days on $($Datenextcleanup.ToLongDateString())`n" )
+}
+
+$Comments
+
+if(!$Action) {
+
+    $Comments.Add( "<i style='color:red'>No actions to be done today</i>`n" )
+}
+
+$CommentsHTML = "<p style='color:blue'>" + $Comments.Replace("`n",'<br>') + "</p>"
+$WSUS = Get-WsusServer
+$AllTargetGroups = $WSUS.GetComputerTargetGroups()
+$PatchReport = $AllTargetGroups | ForEach {
 
     $Group = $_.Name
 
     $_.GetTotalSummary() | ForEach {
 
-        [pscustomobject]@{
+        [PSCustomObject]@{
 
             TargetGroup = $Group
-
             Needed = ($_.NotInstalledCount + $_.DownloadedCount)
-
             "Installed/NotApplicable" = ($_.NotApplicableCount + $_.InstalledCount)
-
             NoStatus = $_.UnknownCount
-
             PendingReboot = $_.InstalledPendingRebootCount
-
         }
-
     }
-
 }
 
 $params = @{
     
-        'encoding'=[System.Text.Encoding]::UTF8
-		
-        'To' = 'recipient@domain.com'
+    'encoding'=[System.Text.Encoding]::UTF8	
+    'To' = 'recipient@domain.com'
+    'From' = 'sender@domain.com'
+    'SmtpServer' = "smtphost"
+    'BodyAsHtml' = $true
+    'Subject' = "WSUS - Patch Report"        
+    'Body' = (($Commentshtml) + "<br>" + ($PatchReport | ConvertTo-Html | Out-String))   
+}
 
-        'From' = 'sender@domain.com'
-
-        'SmtpServer' = "smtphost"
-
-        'BodyAsHtml' = $true
-
-        'Subject' = "WSUS - Patch Report"
-        
-        'Body' = (($commentshtml) + "<br>" + ($patchreport | ConvertTo-Html | Out-String))
-   
-        }
-
-Send-MailMessage @params
+Send-MailMessage @paramsd
