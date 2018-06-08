@@ -228,4 +228,4 @@ $params = @{
     'Body' = (($Commentshtml) + "<br>" + ($PatchReport | ConvertTo-Html | Out-String))   
 }
 
-Send-MailMessage @params
+Send-MailMessage @paramsd
